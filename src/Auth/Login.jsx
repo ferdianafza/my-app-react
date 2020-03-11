@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +38,7 @@ export default class Login extends React.Component {
       localStorage.setItem('token', response.headers.authorization);
       console.log(response.headers.authorization);
       console.log(response.data);
+      this.props.history.push(`/myprofile`);
     })
 
   }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+// import React from 'react';
 import axios from "axios";
 
 export default class MyProfile extends React.Component {
@@ -16,12 +17,16 @@ export default class MyProfile extends React.Component {
     let token = localStorage.getItem('token');
 
     axios
-    .get('http://localhost:3000/api/v1/users/myprofile', { headers: {"Authorization" : ${token}} })
+    .get('http://localhost:3000/api/v1/users/myprofile', { headers: {"Authorization" : `${token}`} })
     .then(response => {
       console.log(response.data);
-      this.setState('id', response.data.id)
-      this.setState('fullname', response.data.fullname)
-      this.setState('email', response.data.email)
+
+      this.setState({id : response.data.id});
+      this.setState({fullname : response.data.fullname});
+      this.setState({email : response.data.email});
+      // this.setState('id', response.data.id)
+      // this.setState('fullname', response.data.fullname)
+      // this.setState('email', response.data.email)
     })
   }
 
