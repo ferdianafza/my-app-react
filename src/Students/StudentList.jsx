@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'; 
 import { Link } from "react-router-dom";
 import CreateStudent from './CreateStudent';
+import SimpleReactFileUpload from './SimpleReactFileUpload';
 
 export default class StudentList extends React.Component {
   state = {
@@ -23,17 +24,23 @@ export default class StudentList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.0.1:3000/api/v1/students`)
-      .then(res => {
-        const students = res.data;
+    axios.get(`http://127.0.0.1:3000/api/v1/students?page=1`)
+    .then(res => {
+        // console.log(res);
+        console.log(res.data);
+        const students = res.data.entries;
         this.setState({ students });
       })
+      // .then(res => {
+      //   const students = res.data;
+      //   this.setState({ students });
+      // })
   }
 
   fetchStudentsList = () => {
-     axios.get(`http://127.0.0.1:3000/api/v1/students`)
+     axios.get(`http://127.0.0.1:3000/api/v1/students?page=1`)
       .then(res => {
-        const students = res.data;
+        const students = res.data.entries;
         this.setState({ students });
       })
   }
@@ -43,6 +50,22 @@ export default class StudentList extends React.Component {
       then((response) => {
         alert('Student Deleted!')
         this.fetchStudentsList();
+      });
+  }
+
+  handlePageChangeNext = () => {
+    axios.get(`http://127.0.0.1:3000/api/v1/students?page=${1+1}`).
+      then((response) => {
+        const students = response.data.entries;
+        this.setState({ students });
+      });
+  }
+
+  handlePageChangePrev = () => {
+    axios.get(`http://127.0.0.1:3000/api/v1/students?page=1`).
+      then((response) => {
+        const students = response.data.entries;
+        this.setState({ students });
       });
   }
 
@@ -80,7 +103,14 @@ export default class StudentList extends React.Component {
           )}
           </tbody>
         </table>
+        <button onClick={() => this.handlePageChangePrev()}>
+          Prev
+        </button>
+        <button onClick={() => this.handlePageChangeNext()}>
+          Next
+        </button>
         <CreateStudent />
+        <Link to={'/uploadfile'}> uploadfile </Link>
       </div>
     )
   }

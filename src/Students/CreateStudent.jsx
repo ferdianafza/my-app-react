@@ -9,14 +9,15 @@ export default class CreateStudent extends React.Component {
   }
 
   fetchStudentsList = () => {
-     axios.get(`http://127.0.0.1:3000/api/v1/students`)
+     axios.get(`http://127.0.0.1:3000/api/v1/students?page=1`)
       .then(res => {
-        const students = res.data;
+        const students = res.data.entries;
         this.setState({ students });
       })
   }
 
   handleChange = event => {
+    // console.log(event.target.files[0])
     this.setState({ [event.target.name]: event.target.value });
   }
 

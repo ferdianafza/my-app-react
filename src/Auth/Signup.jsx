@@ -57,6 +57,7 @@ export default class Login extends React.Component {
           value={fullname}
           onChange={this.handleInputChange}
           />
+          <br />
           <label>Email</label>
         <input
           type='text'
@@ -64,6 +65,7 @@ export default class Login extends React.Component {
           value={email}
           onChange={this.handleInputChange}
           />
+          <br />
         <label>Password</label>
         <input
           type='text'
@@ -71,6 +73,7 @@ export default class Login extends React.Component {
           value={password}
           onChange={this.handleInputChange}
         />
+        <br />
         <label>Password Confirmation</label>
         <input
           type='text'
@@ -78,6 +81,7 @@ export default class Login extends React.Component {
           value={password_confirmation}
           onChange={this.handleInputChange}
         />
+        <br />
         <input type="submit"></input>
       </form>
     )
